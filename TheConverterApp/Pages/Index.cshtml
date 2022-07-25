@@ -1,0 +1,47 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to the Currency Converter</h1>
+    <p>
+        Write a configurable module that given a list of currency exchange rates, converts currencies to one
+        another. Let’s carry on with an example
+    </p>
+
+    <form method="post" action="">
+        <select class="px-4 py-1"
+                asp-for="@Model.ConvertModel.From"
+                asp-items="@Model.ExchangeList">
+            <option value="">
+                Currency From
+            </option>
+        </select>
+        <select class="px-4 py-1"
+                asp-for="@Model.ConvertModel.To"
+                asp-items="@Model.ExchangeList">
+            <option value="">
+                Currency To
+            </option>
+        </select>
+        <input type="number" asp-for="@Model.ConvertModel.Amount" />
+        <button type="submit">
+            Convert
+        </button>
+
+
+        <div>
+            <h3 class="mt-5"> Result:</h3>
+            @if (@Model.Result != 0)
+            {
+                @Math.Round(Model.Result, 2)
+                <a asp-page="Index" asp-page-handler="Clear" class="ml-4">
+                    Clear
+                </a>
+            }
+
+        </div>
+    </form>
+</div>
